@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id       Int    @id
+  name     String
+  username String
+  email    String
+
+  phone   String?
+  website String?
+
+  posts Post[]
+}
+
+model Post {
+  id     Int    @id
+  userId Int
+  title  String
+  body   String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}

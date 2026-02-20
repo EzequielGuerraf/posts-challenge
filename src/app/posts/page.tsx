@@ -307,7 +307,7 @@ export default function PostsPage() {
     postToDelete !== null && deletingId === postToDelete.id;
 
   return (
-    <main className="relative isolate mx-auto min-h-screen w-full max-w-5xl bg-gradient-to-b from-neutral-100 via-neutral-50 to-neutral-100 px-4 py-8 md:py-10">
+    <main className="relative isolate min-h-screen w-full bg-gradient-to-b from-neutral-100 via-neutral-50 to-neutral-100 px-4 py-8 md:px-8 md:py-10">
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-64 bg-gradient-to-b from-neutral-100 via-neutral-50 to-transparent" />
       <div className="pointer-events-none absolute -left-28 top-10 -z-10 h-64 w-64 rounded-full bg-neutral-200/60 blur-3xl" />
       <div className="pointer-events-none absolute -right-20 top-24 -z-10 h-72 w-72 rounded-full bg-slate-200/40 blur-3xl" />

@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Posts Challenge (Next.js + Prisma + SQLite)
 
-## Getting Started
+A full-stack technical challenge built with Next.js App Router and TypeScript.  
+It implements a local posts dashboard (`/posts`) with filtering, resilient error states, and delete actions backed by Prisma v7 + SQLite (Better SQLite3 adapter).
 
-First, run the development server:
+## Requirements
+
+- Node.js `20+` recommended.
+- Tested locally with Node.js `v22.18.0`.
+- npm.
+
+## Setup
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Verify `.env` exists and contains:
+
+```env
+DATABASE_URL="file:./dev.db"
+```
+
+`.env` is committed intentionally for this challenge.
+
+3. Run migrations:
+
+```bash
+npm run db:migrate
+```
+
+4. Seed the database (offline, local JSON only):
+
+```bash
+npm run db:seed
+```
+
+5. Start the app:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Available Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `dev`: `next dev`
+- `build`: `next build`
+- `start`: `next start`
+- `lint`: `eslint`
+- `db:migrate`: `prisma migrate dev`
+- `db:seed`: `prisma db seed`
+- `db:reset`: `prisma migrate reset --force && prisma db seed`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How To Use
 
-## Learn More
+1. Open `http://localhost:3000/posts`.
+2. Filter by user using the **User ID** dropdown (server-side data is loaded once, filtering is instant on the client).
+3. Delete a post by clicking delete on a card, then confirm in the modal.  
+   On delete failure, the UI shows a visible error and allows retrying.
 
-To learn more about Next.js, take a look at the following resources:
+## API
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### `GET /api/posts`
+Returns all posts with author summary.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Example:
 
-## Deploy on Vercel
+```bash
+curl "http://localhost:3000/api/posts"
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Response (200):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```json
+{
+  "posts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Post title",
+      "body": "Post body",
+      "user": { "id": 1, "name": "Leanne Graham" }
+    }
+  ]
+}
+```
+
+### `GET /api/posts?userId=<number>`
+Returns posts filtered by `userId`.
+
+Example:
+
+```bash
+curl "http://localhost:3000/api/posts?userId=1"
+```
+
+Error example (400):
+
+```json
+{ "error": "Invalid userId. It must be a positive integer." }
+```
+
+### `DELETE /api/posts/:id`
+Deletes one post by id.
+
+Example:
+
+```bash
+curl -X DELETE "http://localhost:3000/api/posts/1"
+```
+
+Success (200):
+
+```json
+{ "ok": true }
+```
+
+Not found (404):
+
+```json
+{ "error": "Post not found." }
+```
+
+## Troubleshooting
+
+- Prisma v7 + SQLite uses the Better SQLite3 adapter (`@prisma/adapter-better-sqlite3` + `better-sqlite3`). Ensure dependencies install correctly on your OS.
+- If seed fails, confirm `seed-data/users.json` and `seed-data/posts.json` exist.
+- If seed fails, run `npx prisma generate`.
+- If seed fails, run `npm run db:reset`.

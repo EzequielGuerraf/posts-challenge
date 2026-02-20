@@ -7,8 +7,9 @@
 ## Database / Prisma
 - Using Prisma ORM with SQLite for a lightweight local database.
 - Prisma v7 is used. Runtime configuration is handled via `prisma.config.ts`
+- SQLite access is configured through the Better SQLite3 adapter
 - The database schema includes two models:
-  - `User` and `Post` with a 1..N relationship (`User.posts`, `Post.userId -> User.id`).
+  - `User` and `Post` with a 1..N relationship..
 - IDs are sourced from the provided JSON files (no auto-increment assumptions), so seeding can upsert by `id`.
 
 ## Migrations
@@ -42,3 +43,23 @@
   - If data was loaded successfully at least once, the last successful list remains visible and an error banner is shown instead of a blank screen.
   - Explicit empty state when there are no posts.
 - TailwindCSS is used to speed up implementation of cards and basic layout.
+
+
+## Error handling (unstable internet)
+- Posts listing:
+  - Clear loading state on first load.
+  - On fetch failure, a visible error message is shown with a Retry action.
+  - The UI avoids blank screens whenever possible.
+- Post deletion:
+  - If delete fails, a visible error is shown.
+
+## Client-side cache (low-effort resilience)
+- To improve UX in unstable connections, the last successful posts result may be cached client-side (e.g., localStorage) and used as a fallback on refresh/offline scenarios.
+- Cache is treated as a fallback only.
+
+## Tooling / scripts
+- Core scripts:
+  - `npm run dev` (Next dev server)
+  - `npm run build` / `npm run start` (production build/run)
+  - `npm run db:migrate`, `npm run db:seed`, `npm run db:reset`
+- TailwindCSS is used to speed up implementation of cards and modal UI.

@@ -277,7 +277,7 @@ export default function PostsPage() {
           return (
             <div
               key={p.id}
-              className="transition-transform duration-300 hover:translate-y-[-2px]"
+              className="transition-transform duration-300 hover:-translate-y-0.5"
             >
               <PostCard
                 title={p.title}
@@ -307,13 +307,13 @@ export default function PostsPage() {
     postToDelete !== null && deletingId === postToDelete.id;
 
   return (
-    <main className="relative isolate min-h-screen w-full bg-gradient-to-b from-neutral-100 via-neutral-50 to-neutral-100 px-4 py-8 md:px-8 md:py-10">
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-64 bg-gradient-to-b from-neutral-100 via-neutral-50 to-transparent" />
+    <main className="relative isolate min-h-screen w-full bg-linear-to-b from-neutral-100 via-neutral-50 to-neutral-100 px-4 py-8 md:px-8 md:py-10">
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-64 bg-linear-to-b from-neutral-100 via-neutral-50 to-transparent" />
       <div className="pointer-events-none absolute -left-28 top-10 -z-10 h-64 w-64 rounded-full bg-neutral-200/60 blur-3xl" />
       <div className="pointer-events-none absolute -right-20 top-24 -z-10 h-72 w-72 rounded-full bg-slate-200/40 blur-3xl" />
 
       <section className="relative overflow-hidden rounded-3xl border border-neutral-200 bg-white/95 p-6 shadow-xl shadow-neutral-200/70 backdrop-blur-sm md:p-8">
-        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-neutral-500 via-slate-400 to-zinc-500" />
+        <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-neutral-500 via-slate-400 to-zinc-500" />
 
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-4">
@@ -492,7 +492,7 @@ export default function PostsPage() {
             aria-labelledby="delete-post-title"
             className="relative z-10 w-full max-w-md overflow-hidden rounded-3xl border border-neutral-200 bg-white p-6 shadow-2xl shadow-neutral-900/30"
           >
-            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-red-500 via-rose-500 to-orange-400" />
+            <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-red-500 via-rose-500 to-orange-400" />
             <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-red-100 text-lg font-semibold text-red-700">
               !
             </div>

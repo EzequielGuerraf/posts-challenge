@@ -43,7 +43,7 @@ export function PostCard({
   return (
     <article className="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-gradient-to-b from-white to-neutral-50 p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-neutral-200/70">
       <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-sky-100/70 blur-2xl" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sky-500 via-indigo-500 to-cyan-500" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-1 bg-linear-to-r from-sky-500 via-indigo-500 to-cyan-500" />
 
       <header className="relative mb-4 flex items-start justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3">

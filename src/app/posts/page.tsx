@@ -295,7 +295,7 @@ export default function PostsPage() {
       <div className="pointer-events-none absolute -right-20 top-24 -z-10 h-72 w-72 rounded-full bg-slate-200/40 blur-3xl" />
 
       <section className="relative overflow-hidden rounded-3xl border border-neutral-200 bg-white/95 p-6 shadow-xl shadow-neutral-200/70 backdrop-blur-sm md:p-8">
-        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sky-500 via-indigo-500 to-cyan-500" />
+        <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-sky-500 via-indigo-500 to-cyan-500" />
 
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="space-y-4">

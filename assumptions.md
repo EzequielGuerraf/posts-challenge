@@ -11,11 +11,16 @@
   - `User` and `Post` with a 1..N relationship (`User.posts`, `Post.userId -> User.id`).
 - IDs are sourced from the provided JSON files (no auto-increment assumptions), so seeding can upsert by `id`.
 
+## Migrations
+- Prisma migrations are created via `prisma migrate dev` and committed under `/prisma/migrations` for reproducibility.
+
+
 ## Seeding (offline requirement)
-- Seed data will be read from local JSON files only:
+- Seed data is read from local JSON files only (no external HTTP fetch):
   - `/seed-data/users.json`
   - `/seed-data/posts.json`
-- No external HTTP fetch is used for seeding.
+- Seeding is designed to be idempotent (running it multiple times should not create duplicates) using `upsert` by primary key (`id`).
+- Users are seeded first, then posts, because posts depend on `userId` foreign keys.
 
 ## UX / unstable internet
 - UI will always show explicit loading, empty and error states.

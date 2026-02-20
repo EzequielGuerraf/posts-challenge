@@ -14,7 +14,6 @@
 ## Migrations
 - Prisma migrations are created via `prisma migrate dev` and committed under `/prisma/migrations` for reproducibility.
 
-
 ## Seeding (offline requirement)
 - Seed data is read from local JSON files only (no external HTTP fetch):
   - `/seed-data/users.json`
@@ -26,3 +25,10 @@
 - UI will always show explicit loading, empty and error states.
 - Manual retry will be available for failed fetches.
 - A simple client-side cache (localStorage) may be used to show the last successful result on refresh/offline.
+
+## API
+- Implemented REST endpoints using Next.js Route Handlers:
+  - `GET /api/posts` (optional query param `userId` to filter by author)
+  - `DELETE /api/posts/:id`
+- Responses are JSON and include the post author (user `id` and `name`) to support the UI.
+- Basic input validation is applied for `userId` and `id` (must be positive integers).

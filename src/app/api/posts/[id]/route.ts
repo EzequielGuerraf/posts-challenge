@@ -1,4 +1,3 @@
-// src/app/api/posts/[id]/route.ts
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
@@ -6,10 +5,11 @@ export const dynamic = "force-dynamic";
 
 export async function DELETE(
   _request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const { id: idParam } = await params;
   try {
-    const id = Number(params.id);
+    const id = Number(idParam);
 
     // Validate id param
     if (!Number.isInteger(id) || id <= 0) {
@@ -29,7 +29,7 @@ export async function DELETE(
 
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (err) {
-    console.error(`DELETE /api/posts/${params.id} failed:`, err);
+    console.error(`DELETE /api/posts/${idParam} failed:`, err);
     return NextResponse.json(
       { error: "Couldn’t delete the post. Please try again." },
       { status: 500 }

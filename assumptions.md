@@ -32,3 +32,13 @@
   - `DELETE /api/posts/:id`
 - Responses are JSON and include the post author (user `id` and `name`) to support the UI.
 - Basic input validation is applied for `userId` and `id` (must be positive integers).
+
+
+## UI (/posts)
+- The `/posts` page fetches data from the backend (`GET /api/posts`).
+- The UI is designed for unstable connections:
+  - Clear loading state on first load.
+  - Visible error state with a manual Retry action.
+  - If data was loaded successfully at least once, the last successful list remains visible and an error banner is shown instead of a blank screen.
+  - Explicit empty state when there are no posts.
+- TailwindCSS is used to speed up implementation of cards and basic layout.

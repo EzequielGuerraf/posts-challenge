@@ -7,6 +7,9 @@
 ## Database / Prisma
 - Using Prisma ORM with SQLite for a lightweight local database.
 - Prisma v7 is used. Runtime configuration is handled via `prisma.config.ts`
+- The database schema includes two models:
+  - `User` and `Post` with a 1..N relationship (`User.posts`, `Post.userId -> User.id`).
+- IDs are sourced from the provided JSON files (no auto-increment assumptions), so seeding can upsert by `id`.
 
 ## Seeding (offline requirement)
 - Seed data will be read from local JSON files only:

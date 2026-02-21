@@ -15,7 +15,6 @@ export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
     adapter,
-    // log: ["query", "error", "warn"], // Uncomment if you want query logs while debugging.
   });
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
